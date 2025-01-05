@@ -1,0 +1,89 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        stages: [pre-commit]
+      - id: end-of-file-fixer
+        stages: [pre-commit]
+      - id: check-yaml
+        stages: [pre-commit]
+      - id: check-added-large-files
+        args: ['--maxkb=1024']
+        stages: [pre-commit]
+      - id: check-ast
+        stages: [pre-commit]
+      - id: check-case-conflict
+        stages: [pre-commit]
+      - id: check-docstring-first
+        stages: [pre-commit]
+      - id: check-executables-have-shebangs
+        stages: [pre-commit]
+      - id: check-json
+        stages: [pre-commit]
+      - id: check-merge-conflict
+        stages: [pre-commit]
+      - id: check-toml
+        stages: [pre-commit]
+      - id: debug-statements
+        stages: [pre-commit]
+      - id: detect-private-key
+        stages: [pre-commit]
+      - id: mixed-line-ending
+        args: [--fix=lf]
+        stages: [pre-commit]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.2.0
+    hooks:
+      - id: ruff
+        args:
+          - --fix
+          - --exit-non-zero-on-fix
+          - --target-version=py312
+          - --select=ALL
+          - --ignore=D,ANN,FIX,ERA,ARG002,COM812,ISC001,Q000,Q003
+          - --line-length=80
+          - --extend-exclude=tests/
+      - id: ruff-format
+        args:
+          - --line-length=80
+          - --target-version=py312
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        additional_dependencies:
+          - pydantic
+          - pytest
+        args:
+          - --python-version=3.12
+          - --disallow-untyped-defs
+          - --disallow-incomplete-defs
+          - --check-untyped-defs
+          - --disallow-untyped-decorators
+          - --no-implicit-optional
+          - --warn-redundant-casts
+          - --warn-unused-ignores
+          - --warn-return-any
+          - --strict-optional
+          - --strict-equality
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.6
+    hooks:
+      - id: bandit
+        args: ["-c", "pyproject.toml"]
+        additional_dependencies: ["bandit[toml]"]
+
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: pytest
+        language: system
+        types: [python]
+        pass_filenames: false
+        always_run: true
+        args: ["tests"]

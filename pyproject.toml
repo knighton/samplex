@@ -1,0 +1,104 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+authors = [
+    {name = "James Knighton", email = "iamknighton@gmail.com"},
+]
+classifiers = [
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "pydantic>=2.0",
+]
+description = "A PyTorch Datasets and DataLoaders library from the future"
+name = "knighton-samplex"
+readme = "README.md"
+requires-python = ">=3.12"
+version = "0.1.0"
+
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.8.0",
+    "pre-commit>=3.5.0",
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.2.0",
+]
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+targets = ["samplex"]
+
+[tool.coverage.report]
+exclude_also = [
+    "def __repr__",
+    "if TYPE_CHECKING:",
+    "if __name__ == \"__main__\":",
+    "pass",
+    "raise NotImplementedError",
+    "...",
+]
+fail_under = 90
+
+[tool.coverage.run]
+branch = true
+source = ["samplex"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["samplex"]
+
+[tool.mypy]
+check_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_untyped_decorators = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+python_version = "3.12"
+strict_equality = true
+strict_optional = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+
+[tool.ruff]
+extend-exclude = ["tests/"]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.format]
+indent-style = "space"
+line-ending = "lf"
+quote-style = "single"
+skip-magic-trailing-comma = false
+
+[tool.ruff.lint]
+fixable = ["ALL"]
+unfixable = []
+ignore = [
+    "ANN",
+    "ARG002",
+    "COM812",
+    "D",
+    "ERA",
+    "FIX",
+    "ISC001",
+    "Q000",
+    "Q003",
+]
+select = ["ALL"]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+force-single-line = true
+force-sort-within-sections = true
+split-on-trailing-comma = true
+
+[tool.ruff.lint.pycodestyle]
+max-line-length = 80

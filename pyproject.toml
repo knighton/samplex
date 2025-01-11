@@ -11,6 +11,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
 ]
 dependencies = [
+    "numpy>=2.1.1",
     "pydantic>=2.0",
 ]
 description = "A PyTorch Datasets and DataLoaders library from the future"
@@ -52,6 +53,7 @@ packages = ["samplex"]
 
 [tool.mypy]
 check_untyped_defs = true
+disable_error_code = ["valid-type"]
 disallow_incomplete_defs = true
 disallow_untyped_decorators = true
 disallow_untyped_defs = true
@@ -62,6 +64,14 @@ strict_optional = true
 warn_redundant_casts = true
 warn_return_any = true
 warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+module = "numpy.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+ignore_errors = true
 
 [tool.pytest.ini_options]
 minversion = "7.0"
@@ -79,8 +89,7 @@ quote-style = "single"
 skip-magic-trailing-comma = false
 
 [tool.ruff.lint]
-fixable = ["ALL"]
-unfixable = []
+select = ["ALL"]
 ignore = [
     "ANN",
     "ARG002",
@@ -91,8 +100,14 @@ ignore = [
     "ISC001",
     "Q000",
     "Q003",
+    "UP006",
+    "UP007",
+    "UP040",
+    "TRY003",
+    "EM102"
 ]
-select = ["ALL"]
+fixable = ["ALL"]
+unfixable = []
 
 [tool.ruff.lint.isort]
 combine-as-imports = true

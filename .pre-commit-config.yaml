@@ -40,11 +40,6 @@ repos:
         args:
           - --fix
           - --exit-non-zero-on-fix
-          - --target-version=py312
-          - --select=ALL
-          - --ignore=D,ANN,FIX,ERA,ARG002,COM812,ISC001,Q000,Q003
-          - --line-length=80
-          - --extend-exclude=tests/
       - id: ruff-format
         args:
           - --line-length=80

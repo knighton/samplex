@@ -16,8 +16,8 @@ class SxUtilArrayError(SxUtilError):
     """Errors of `samplex.util.array`."""
 
 
-class SxIndexWrapError(SxUtilArrayError, TypeError):
-    """Index wraparound error."""
+class SxIndexOutOfRangeError(SxUtilArrayError, IndexError):
+    """Array index out of range error."""
 
     de = 'Array-Index-Ganzzahl ist außerhalb des gültigen Bereichs. Unterstützt wird der Bereich [-size, size).'
     en = 'Array index integer is out of range. Supported is the range [-size, size).'
@@ -132,7 +132,7 @@ RecursiveIndex = Union[
 def _wrap(idx: int, num: int) -> int:
     """Wrap an index to handle negative indices and bounds checking."""
     if not (-num <= idx < num):
-        raise SxIndexWrapError(index=idx, length=num)
+        raise SxIndexOutOfRangeError(index=idx, length=num)
 
     if idx < 0:
         idx += num

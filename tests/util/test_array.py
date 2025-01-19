@@ -6,7 +6,7 @@ from numpy.typing import NDArray
 import pytest
 
 from samplex.util.array import Array
-from samplex.util.array import SxIndexWrapError
+from samplex.util.array import SxIndexOutOfRangeError
 from samplex.util.array import SxBoolMaskLenError
 from samplex.util.array import SxBoolMaskNdimError
 from samplex.util.array import SxSliceStepError
@@ -77,7 +77,7 @@ class TestArrayBasicIndexing:
     ])
     def test_index_out_of_bounds(self, arr, idx, length):
         """Test out of bounds index access."""
-        with pytest.raises(SxIndexWrapError) as excinfo:
+        with pytest.raises(SxIndexOutOfRangeError) as excinfo:
             arr[idx]
         assert excinfo.value.kwargs['index'] == idx
         assert excinfo.value.kwargs['length'] == length
@@ -283,7 +283,7 @@ class TestArrayEdgeCases:
         assert arr[()] == ()
         assert arr[np.array([], dtype=int)] == []
 
-        with pytest.raises(SxIndexWrapError) as excinfo:
+        with pytest.raises(SxIndexOutOfRangeError) as excinfo:
             arr[0]
         assert excinfo.value.kwargs == {'index': 0, 'length': 0}
 
@@ -299,7 +299,7 @@ class TestArrayEdgeCases:
         assert arr[(0,)] == (42,)
         assert arr[np.array([0])] == [42]
 
-        with pytest.raises(SxIndexWrapError) as excinfo:
+        with pytest.raises(SxIndexOutOfRangeError) as excinfo:
             arr[1]
         assert excinfo.value.kwargs == {'index': 1, 'length': 1}
 

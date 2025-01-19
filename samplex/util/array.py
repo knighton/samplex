@@ -40,7 +40,7 @@ def _wrap(idx: int, num: int) -> int:
     return idx
 
 
-class SmartGetItem(ABC, Sequence, Generic[T]):
+class Array(ABC, Sequence, Generic[T]):
     @abstractmethod
     def __len__(self) -> int:
         ...

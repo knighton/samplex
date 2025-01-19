@@ -78,8 +78,9 @@ minversion = "7.0"
 testpaths = ["tests"]
 
 [tool.ruff]
-extend-exclude = ["tests/"]
-line-length = 88
+exclude = ["tests"]
+extend-exclude = ["tests"]
+line-length = 80
 target-version = "py312"
 
 [tool.ruff.format]
@@ -91,6 +92,7 @@ skip-magic-trailing-comma = false
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
+    "ARG001",
     "ANN",
     "ARG002",
     "COM812",
@@ -102,9 +104,20 @@ ignore = [
     "Q003",
     "UP006",
     "UP007",
+    "UP039",
     "UP040",
     "TRY003",
-    "EM102"
+    "EM102",
+    "EM101",
+    "FBT001",
+    "FBT002",
+    "SIM300",   # Yoda conditions.
+    "N807",     # Double underscore method names.
+    "C901",     # Too complex.
+    "PLR0911",  # Too many returns.
+    "PLR0912",  # Too many branches.
+    "PLR0913",  # Too many arguments.
+    "TCH001"    # Retarded ass rule.
 ]
 fixable = ["ALL"]
 unfixable = []

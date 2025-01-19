@@ -2,7 +2,14 @@ from typing import Any
 
 
 class SxError(Exception):
+    de: str
     en: str
+    es: str
+    fr: str
+    ja: str
+    ko: str
+    ru: str
+    zh: str
 
     def __init__(self, **kwargs: Any):
         self.kwargs = kwargs

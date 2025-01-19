@@ -117,7 +117,9 @@ ignore = [
     "PLR0911",  # Too many returns.
     "PLR0912",  # Too many branches.
     "PLR0913",  # Too many arguments.
-    "TCH001"    # Retarded ass rule.
+    "TCH001",   # Retarded ass rule.
+    "RUF001",   # Ambiguous chars.
+    "E501"      # Line length.
 ]
 fixable = ["ALL"]
 unfixable = []
